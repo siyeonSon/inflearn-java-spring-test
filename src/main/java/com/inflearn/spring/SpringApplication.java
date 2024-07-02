@@ -14,13 +14,7 @@ public class SpringApplication {
         long num2 = Long.parseLong(parts[2]);
         String operator = parts[1];
 
-        long answer = switch (operator) {
-            case "+" -> num1 + num2;
-            case "-" -> num1 - num2;
-            case "*" -> num1 * num2;
-            case "/" -> num1 / num2;
-            default -> throw new InvalidOperatorException();
-        };
+        long answer = new Calculator().calculate(num1, operator, num2);
         System.out.println(answer);
     }
 
