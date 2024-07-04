@@ -7,9 +7,24 @@ public class CalculationRequest {
     private final String operator;
 
     public CalculationRequest(String[] parts) {
+        if(parts.length != 3) {
+            throw new BadRequestException();
+        }
+        String operators = parts[1];
+        if(operators.length() != 1 || isInvalidOperator(operators)) {
+            throw new InvalidOperatorException();
+        }
+
         this.num1 = Long.parseLong(parts[0]);
         this.num2 = Long.parseLong(parts[2]);
         this.operator = parts[1];
+    }
+
+    private boolean isInvalidOperator(String operators) {
+        return !operators.equals("+") &&
+                !operators.equals("-") &&
+                !operators.equals("*") &&
+                !operators.equals("/");
     }
 
     public long getNum1() {
